@@ -1,0 +1,301 @@
+body {
+  font-family: sans-serif;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.game {
+  width: 100%;
+  height: 50%;
+  background-color: white;
+  display: flex;
+  border-bottom: 2px solid grey;
+  transition: all .2s ease-in-out;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+
+.game:hover {
+  transform: scale(1.1);
+  background-color: whitesmoke;
+}
+
+.middleInfo {
+  height: 100px;
+  width: 300px;
+  background-color: whitesmoke;
+  border: 2px solid grey;
+  z-index: 1;
+  margin-bottom: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-right: -120px;
+  margin-left: -120px;
+}
+
+.middleInfo h1 {
+  margin: 0;
+  font-size: 3em;
+}
+
+.middleInfo h2 {
+  margin: 0
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  width: 50%;
+}
+
+.away {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  width: 50%;
+}
+
+.home {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2em;
+}
+
+.nameLogo {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.home h2 {
+  font-size: 10em;
+}
+
+.away {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 1.2em;
+}
+
+.away h2 {
+  font-size: 10em;
+}
+
+.date {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  width: 40%;
+  justify-content: space-around;
+}
+
+#prev {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+#prev:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+#next {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+#next:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.gameview {
+  width: 90vw;
+}
+
+.singlegame {
+  width: 90vw;
+  height: 90vh;
+}
+
+.scoreboard {
+  width: 100%;
+  height: 30vh;
+  background-color: white;
+  display: flex;
+  justify-content: space-between; 
+}
+
+.scoreboard h1 {
+  font-size: 10em;
+  margin: 10%;
+}
+
+.middleInfoSmall {
+  background-color: whitesmoke;
+  height: 100px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.middleInfoSmall h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+.middleInfoSmall h2 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.period {
+  display: flex;
+  height: 150px;
+  width: 40vw;
+  padding: 0;
+  justify-content: space-between;
+  background-color: white;
+  border-top: 2px solid lightgrey;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.period h1 {
+  margin: 0;
+}
+
+.period h2 {
+  margin-top: 5px;
+}
+
+.periodmiddle {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 2%;
+}
+
+.periodmiddle h1 {
+  margin: 0;
+}
+
+.periodhome {
+  width: 50%;
+}
+
+.periodaway {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.periodhome {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.periodInfo {
+  height: 100%;
+  width: 80%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.detailed {
+  display: flex;
+  width: 100%;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.boxscore h2 {
+  font-size: 1em;
+}
+
+.box {
+  height: 100%;
+  width: 25vw;
+  background-color: white;
+  padding-left: 2%;
+  padding-right: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+}
+
+.boxscore-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+}
+
+.game-chart {
+  height: 50vh;
+  width: 55vw;
+}
+
+.shotGraph {
+  height: 500px;
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.legend {
+  height: 500px;
+  width: 500px;
+}
+
+.chart {
+  height: 500px;
+  width: 500px;
+}
+
+.goalGraph {
+  height: 500px;
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
