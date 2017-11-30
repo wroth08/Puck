@@ -145,11 +145,14 @@ body {
 }
 
 .scoreboard {
-  width: 100%;
+  width: 90vw;
   height: 30vh;
   background-color: white;
   display: flex;
   justify-content: space-between; 
+  position: fixed;
+  z-index: 1;
+  border-bottom: 10px solid lightgrey;
 }
 
 .scoreboard h1 {
@@ -243,6 +246,8 @@ body {
   height: 60vh;
   justify-content: center;
   align-items: center;
+  position: relative;
+  top: 30vh;
 }
 
 
@@ -298,4 +303,101 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.eventfeed {
+  width: 90vw;
+  background-color: white;
+}
+
+.gameEvent {
+  width: 90%;
+  margin-left: 5%;
+  height: 10%;
+  background-color: whitesmoke;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.gameEvent h1 {
+  margin-top: 0;
+  font-weight: bolder;
+}
+
+.gameEvent a {
+  color: black;
+}
+
+.gameEvent a:hover {
+  color: darkblue;
+}
+
+.gameEvent h2 {
+  font-size: 1.4em;
+}
+
+.faceoff {
+  width: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeEvent {
+  width: 100%;
+  background-color: #9ecaa2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.penaltyEvent {
+  width: 100%;
+  background-color: #88b7bd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shotEvent {
+  width: 100%;
+  background-color: #f7d18a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.missedShotEvent {
+  background-color: #e2d0aa;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.goalEvent {
+  background-color: #f8684f;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.regularEvent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 import Period from './Period'
 import BoxScore from './BoxScore'
-import {Link} from 'react-router-dom'
+import GameEventFeed from './GameEventFeed'
+import Scoreboard from './Scoreboard'
 
 class GameView extends Component {
 
@@ -34,24 +36,10 @@ class GameView extends Component {
                 hour = ("0" + hour).slice(-2)
                 timeRemaining = hour + timeRemaining.substring(2, 5) + " ET"
             }
-            var period = this.props.liveData['liveData']['linescore']['currentPeriodOrdinal']
         return (
                 <div className="gameview">
                     <div className="singlegame">
-                        <div className="scoreboard">
-                            <div className="home">
-                                <img src={homeImg} alt="logo" height="200" width="200"/>
-                                <h1>{this.props.liveData['liveData']['linescore']['teams']['home']['goals']}</h1>
-                            </div>
-                            <div className="middleInfoSmall">
-                                <h2>{period}</h2>
-                                <h1>{timeRemaining}</h1>
-                            </div>
-                            <div className="away">
-                                <img src={awayImg} alt="logo" height="200" width="200"/>
-                                <h1>{this.props.liveData['liveData']['linescore']['teams']['away']['goals']}</h1>
-                            </div>
-                        </div>
+                        <Scoreboard liveData={this.props.liveData} currentGame={this.props.currentGame} teams={this.props.teams}/>
                         <div className="detailed">
                             <div className="box">
                                 <BoxScore 
@@ -100,6 +88,12 @@ class GameView extends Component {
                 <Link to={`/game/${this.props.id}/visualization`}>
                     Visualize
                 </Link>
+                <GameEventFeed
+                teams={this.props.teams}
+                liveData={this.props.liveData}
+                currentGame={this.props.currentGame}
+                id={this.props.id}
+               />
             </div>
         )   
     } else {

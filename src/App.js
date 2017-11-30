@@ -7,6 +7,8 @@ import GameView from './components/GameView'
 import GameVisualization from './components/GameVisualization'
 import PlayerShots from './components/PlayerShots'
 import PlayerGoals from './components/PlayerGoals'
+import GameEventFeed from './components/GameEventFeed'
+import PlayerInfo from './components/PlayerInfo'
 
 var moment = require('moment')
 
@@ -41,7 +43,7 @@ class App extends Component {
     this.getLiveScores()
     this.getTeams(this.state.time)
     this.getStandings()
-    this.getShotData(8477492)
+    this.getShotData(8475765)
     var interval = setInterval(this.getLiveScores, 100000)
   }
 
@@ -55,7 +57,6 @@ class App extends Component {
     fetch('http://statsapi.web.nhl.com/api/v1/standings')
       .then( (res) => res.json())
       .then( (res) => {
-          console.log(res.records)
       })
   }
 
@@ -145,6 +146,15 @@ class App extends Component {
             id={this.state.currentGameId}
           />}
         />
+        <Route exact path="/game/:id/events" component={() => <GameEventFeed
+          teams={this.state.teams}
+          liveData={this.state.liveGame}
+          currentGame={this.state.games.filter( (game) => {
+            return game['gamePk'] === this.state.currentGameId
+          })}
+          id={this.state.currentGameId}
+         />}
+        />
         <Route exact path="/game/:id/visualization" component={() => <GameVisualization 
           teams={this.state.teams}
           liveData={this.state.liveGame}
@@ -153,6 +163,11 @@ class App extends Component {
           })}
         />}
         />
+        <Route exact path="/player/:id" component={() => <PlayerInfo
+
+          />}
+        />
+
         <Route exact path="/player/:id/shots" component={() => <PlayerShots 
           totalShots={this.state.player.shots['shots']}
           backhand={this.state.player.shots['shotsBackhand']}

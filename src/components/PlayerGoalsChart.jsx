@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {VictoryPie, VictoryLabel, VictoryTheme, VictoryLegend} from 'victory'
+import {VictoryPie, VictoryLabel} from 'victory'
 import CustomTheme from './CustomTheme'
 
 class PlayerGoalsChart extends Component {
