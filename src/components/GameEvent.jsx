@@ -12,7 +12,7 @@ class GameEvent extends Component {
         if (this.props.type === "Faceoff") {
             let winner = this.props.players[0]['player']
             let loser = this.props.players[1]['player']
-            description = <h1><Link to={`/player/${winner.id}`}>{winner.fullName}</Link> faceoff won vs <Link to={`/player/${loser.id}`}>{loser.fullName}</Link></h1>
+            description = <h1><Link to={{pathname: `/player/${winner.id}`, state: {id: winner.id}}}>{winner.fullName}</Link> faceoff won vs <Link to={`/player/${loser.id}`}>{loser.fullName}</Link></h1>
             event = <div className="faceoff">
                         <h2>{this.props.time} left in period {this.props.period}</h2>
                         {description}

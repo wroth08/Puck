@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 
 import Period from './Period'
 import BoxScore from './BoxScore'
 import GameEventFeed from './GameEventFeed'
 import Scoreboard from './Scoreboard'
+import ScoringPlays from './ScoringPlays'
 
 class GameView extends Component {
 
@@ -85,9 +85,10 @@ class GameView extends Component {
                             </div>
                         </div>
                 </div>
-                <Link to={`/game/${this.props.id}/visualization`}>
-                    Visualize
-                </Link>
+                <ScoringPlays 
+                    scoringPlays={this.props.currentGame[0]['scoringPlays']}
+                    teams={this.props.teams}
+                 />
                 <GameEventFeed
                 teams={this.props.teams}
                 liveData={this.props.liveData}

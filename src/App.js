@@ -9,6 +9,7 @@ import PlayerShots from './components/PlayerShots'
 import PlayerGoals from './components/PlayerGoals'
 import GameEventFeed from './components/GameEventFeed'
 import PlayerInfo from './components/PlayerInfo'
+import Standings from './components/Standings'
 
 var moment = require('moment')
 
@@ -34,7 +35,8 @@ class App extends Component {
       liveGame: undefined,
       player: {
         shots: {}
-      }
+      },
+      standings: []
     }
   }
 
@@ -44,6 +46,7 @@ class App extends Component {
     this.getTeams(this.state.time)
     this.getStandings()
     this.getShotData(8475765)
+    this.getStandings()
     var interval = setInterval(this.getLiveScores, 100000)
   }
 
@@ -57,11 +60,12 @@ class App extends Component {
     fetch('http://statsapi.web.nhl.com/api/v1/standings')
       .then( (res) => res.json())
       .then( (res) => {
+        this.setState({standings: res['records']})
       })
   }
 
   getLiveScores() {
-    fetch(`https://statsapi.web.nhl.com/api/v1/schedule?startDate=${this.state.time}&endDate=${this.state.time}&expand=schedule.teams,schedule.linescore,schedule.broadcasts,schedule.ticket,schedule.game.content.media.epg&leaderCategories=&site=en_nhl&teamId=`)
+    fetch(`https://statsapi.web.nhl.com/api/v1/schedule?startDate=${this.state.time}&endDate=${this.state.time}&expand=schedule.teams,schedule.linescore,schedule.broadcasts,schedule.ticket,schedule.scoringplays,schedule.game.content.media.epg&leaderCategories=&site=en_nhl&teamId=`)
       .then( (res) => res.json())
       .then( (res) => {
         this.setState({games: res.dates[0]['games']})
@@ -95,7 +99,6 @@ class App extends Component {
     fetch(proxyUrl + targetUrl)
         .then( (res) => res.json())
         .then( (res) => {
-            console.log(res['data'][0])
             this.setState({player: {shots: res['data'][0]}})
         })
   }
@@ -127,7 +130,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-        <Route path="/dashboard" component={() => <Dashboard 
+        <Route exact path="/" component={() => <Dashboard 
             getLiveData={this.getLiveData}
             games={this.state.games} 
             teams={this.state.teams} 
@@ -135,6 +138,13 @@ class App extends Component {
             nextDay={this.nextDay}
             prevDay={this.prevDay}
             setGameId={this.setGameId}/>}
+          />
+          <Route path="/standings" component={() => <Standings
+              games={this.state.games} 
+              teams={this.state.teams} 
+              time={moment(this.state.time).format("MMMM DD")}
+              standings={this.state.standings}
+            />}
           />
         <Route exact path="/game/:id" component={() => <GameView 
             teams={this.state.teams}
@@ -163,8 +173,8 @@ class App extends Component {
           })}
         />}
         />
-        <Route exact path="/player/:id" component={() => <PlayerInfo
-
+        <Route exact path="/player/:id" component={({match}) => <PlayerInfo
+          id={match.params.id}
           />}
         />
 
