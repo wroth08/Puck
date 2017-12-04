@@ -10,6 +10,7 @@ import PlayerGoals from './components/PlayerGoals'
 import GameEventFeed from './components/GameEventFeed'
 import PlayerInfo from './components/PlayerInfo'
 import Standings from './components/Standings'
+import Team from './components/Team'
 
 var moment = require('moment')
 
@@ -175,6 +176,13 @@ class App extends Component {
         />
         <Route exact path="/player/:id" component={({match}) => <PlayerInfo
           id={match.params.id}
+          />}
+        />
+
+        <Route exact path="/teams/:id" component={({match}) => <Team
+          id={match.params.id}
+          teams={this.state.teams}
+          standings={this.state.standings}
           />}
         />
 
