@@ -11,6 +11,7 @@ import GameEventFeed from './components/GameEventFeed'
 import PlayerInfo from './components/PlayerInfo'
 import Standings from './components/Standings'
 import Team from './components/Team'
+import NavBar from './components/NavBar'
 
 var moment = require('moment')
 
@@ -131,6 +132,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+        <NavBar/>
         <Route exact path="/" component={() => <Dashboard 
             getLiveData={this.getLiveData}
             games={this.state.games} 

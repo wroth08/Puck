@@ -2,6 +2,7 @@ body {
   font-family: sans-serif;
   background-color: lightgrey;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -10,6 +11,12 @@ body {
   width: 90vw;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5vw;
+  margin-left: 5vw;
+  position: relative;
+  top: 64px;
 }
 
 .game {
@@ -34,7 +41,6 @@ body {
   width: 300px;
   background-color: whitesmoke;
   border: 2px solid grey;
-  z-index: 1;
   margin-bottom: 300px;
   display: flex;
   justify-content: center;
@@ -137,6 +143,10 @@ body {
 
 .gameview {
   width: 90vw;
+  margin-right: 5vw;
+  margin-left: 5vw;
+  position: relative;
+  top: 64px;
 }
 
 .singlegame {
@@ -151,8 +161,10 @@ body {
   display: flex;
   justify-content: space-between; 
   position: fixed;
-  z-index: 1;
+  top: 64px;
+  /* padding-top: 64px; */
   border-bottom: 5px solid black;
+  z-index: 1;
 }
 
 .scoreboard h1 {
@@ -407,6 +419,7 @@ body {
 .player {
   width: 100vw;
   background-color: whitesmoke;
+  position: relative;
 }
 
 .playerPhoto {
@@ -527,7 +540,14 @@ body {
 .standings {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100vw;
+  position: relative;
+  top: 64px;
+}
+
+.homeLink:hover {
+  background-color: whitesmoke;
 }
 
 .conference {
@@ -634,4 +654,39 @@ body {
 
 .teamInfo div h2 {
   margin-top: 0;
+}
+
+.dashLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.dashLink:hover {
+  background-color: white;
+}
+
+.navBar {
+  height: 60px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7da5d8;
+  border-bottom: 4px solid black;
+  z-index: 1;
+  position: fixed;
+}
+
+.navBar h1 {
+  margin-right: 15vw;
+  margin-left: 15vw;
+}
+
+.playerPosition {
+  position: relative;
+  top: 64px;
 }

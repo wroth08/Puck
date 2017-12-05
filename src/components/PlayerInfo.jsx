@@ -379,7 +379,7 @@ class PlayerInfo extends Component {
 
     render() {
         return (
-            <div>
+            <div className="playerPosition">
                 <img className="playerPhoto" src={`https://nhl.bamcontent.com/images/actionshots/${this.props.id}.jpg`} alt="player"/>
                 <div className="player">
                     <div className="playerHeader">
