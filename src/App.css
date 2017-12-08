@@ -178,6 +178,16 @@ body {
   margin: 10%;
 }
 
+.scoreboard .home {
+  display: flex;
+  justify-content: space-around;
+}
+
+.scoreboard .away {
+  display: flex;
+  justify-content: space-around;
+}
+
 .middleInfoSmall {
   background-color: whitesmoke;
   height: 100px;
@@ -341,6 +351,7 @@ body {
   justify-content: center;
   align-items: center;
   border: 1px solid black;
+  text-align: center;
 }
 
 .gameEvent h1 {
@@ -485,6 +496,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: inherit;
+  text-align: center;
 }
 
 .scoringPlay h1 {
@@ -861,5 +874,146 @@ body {
 
   .date h1 {
     font-size: 1.5rem;
+  }
+
+  .standings h2 {
+    font-size: 0.75rem;
+  }
+
+  .standings h3 {
+    font-size: 0.75rem;
+  }
+
+  .standingsrow {
+    align-items: center;
+    padding-right: 10%;
+    padding-left: 10%;
+  }
+
+  .teamInfo {
+    min-height: 50vh;
+  }
+  
+  .teamInfo h1 {
+    font-size: 1rem;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .teamInfo h2 {
+    font-size: 1rem;
+  }
+
+  .teamInfo img {
+    margin-top: 0;
+    width: 80%;
+  }
+
+  .teamstuff {
+    padding: 17px;
+    margin-top: 0;
+  }
+
+  .playerRow {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .playerRow img {
+    width: 168px;
+    margin-top: 7px;
+  }
+
+  .gameview h1 {
+    font-size: 1rem;
+  }
+
+  .gameview h2 {
+    font-size: 1rem;
+  }
+
+  .gameview img {
+    height: 60px;
+    width: 60px;
+  }
+
+  .scoreboard {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scoreboard h1 {
+    font-size: 2rem;
+  }
+
+  .middleInfoSmall {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .middleInfoSmall h1 {
+    font-size: 1.3rem;
+    margin-right: 20%;
+  }
+
+  .middleInfoSmall h2 {
+    font-size: 1.3rem;
+    margin-left: 20%;
+  }
+
+  .detailed {
+    height: 42vh;
+    display: flex;
+    align-items: center;
+    background-color: white;
+  }
+
+  .detailed h1 {
+    font-size: 0.75rem;
+  }
+
+  .periodInfo {
+    height: auto;
+    width: 60%;
+  }
+
+  .period {
+    height: 50px;
+    width: 35vw;
+  }
+
+  .periodhome {
+    width: 30%;
+  }
+
+  .periodaway {
+    width: 30%;
+  }
+
+  .period h1 {
+    font-size: 0.5rem;
+  }
+
+  .detailed h2 {
+    font-size: 0.4rem;
+  }
+
+  .scoringPlays h2 {
+    font-size: 0.75rem;
+  }
+
+  .scoringPlays h1 {
+    font-size: 1.5rem;
+  }
+
+  .scoringDescription h1 {
+    font-size: 0.75rem;
+  }
+
+  .singlegame {
+    height: auto;
+    margin-bottom: 30vh;
   }
 }
