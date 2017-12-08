@@ -1016,4 +1016,32 @@ body {
     height: auto;
     margin-bottom: 30vh;
   }
+
+  .playerPosition h1 {
+    font-size: 1rem;
+  }
+
+  .playerPosition h2 {
+    font-size: 1rem;
+  }
+
+  .playerPosition h3 {
+    font-size: 1rem;
+  }
+
+  .seasonTotalsRow {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .seasonTotalsRow .chart {
+    width: 80vw;
+    height: auto;
+  }
+
+  .seasonTotals .chart2 {
+    width: 90vw;
+    height: 500px;
+    visibility: hidden;
+  }
 }
