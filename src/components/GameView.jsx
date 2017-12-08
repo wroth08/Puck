@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 
 import Period from './Period'
 import BoxScore from './BoxScore'
@@ -8,6 +7,19 @@ import Scoreboard from './Scoreboard'
 import ScoringPlays from './ScoringPlays'
 
 class GameView extends Component {
+
+    constructor() {
+        super()
+        this.state = {
+            
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.currentGame === undefined) {
+            
+        }
+    }
 
     render() {
         if (this.props.liveData !== undefined && this.props.currentGame[0] !== undefined) {

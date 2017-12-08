@@ -29,12 +29,19 @@ body {
   align-items: center;
   text-decoration: none;
   color: black;
+  min-width: 300px;
+}
+
+.game img {
+  height: 300px;
+  width: 300px;
 }
 
 .game:hover {
   transform: scale(1.1);
   background-color: whitesmoke;
 }
+
 
 .middleInfo {
   height: 100px;
@@ -52,7 +59,7 @@ body {
 
 .middleInfo h1 {
   margin: 0;
-  font-size: 3em;
+  font-size: 3rem;
 }
 
 .middleInfo h2 {
@@ -92,7 +99,7 @@ body {
 }
 
 .home h2 {
-  font-size: 10em;
+  font-size: 10rem;
 }
 
 .away {
@@ -102,7 +109,7 @@ body {
 }
 
 .away h2 {
-  font-size: 10em;
+  font-size: 10rem;
 }
 
 .date {
@@ -162,7 +169,6 @@ body {
   justify-content: space-between; 
   position: fixed;
   top: 64px;
-  /* padding-top: 64px; */
   border-bottom: 5px solid black;
   z-index: 1;
 }
@@ -623,11 +629,15 @@ body {
 
 .teamInfo {
   width: 90vw;
+  margin-right: 5vw;
+  margin-left: 5vw;
   min-height: 90vh;
   background-color: whitesmoke;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  top: 64px;
 }
 .teamImg {
   height: 50vh;
@@ -635,7 +645,7 @@ body {
   margin-top: 5vh;
 }
 
-.teamInfo div {
+.teamstuff {
   width: 90%;
   font-size: 2em;
   margin-top: 30px;
@@ -648,11 +658,11 @@ body {
   margin-bottom: 10px;
 }
 
-.teamInfo div h1 {
+.teamstuff h1 {
   margin-bottom: 0;
 }
 
-.teamInfo div h2 {
+.teamstuff h2 {
   margin-top: 0;
 }
 
@@ -689,4 +699,167 @@ body {
 .playerPosition {
   position: relative;
   top: 64px;
+}
+
+.roster {
+  width: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.playerRow {
+  background-color: lightgrey;
+  border-bottom: 2px solid grey;
+  padding: 5px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all .2s ease-in-out;
+}
+
+.playerRow:hover {
+  transform: scale(1.1);
+  background-color: #77a2dd;
+  cursor: pointer;
+}
+
+.roster a {
+  color: black;
+  text-decoration: none;
+}
+
+.playerRow div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  background-color: white;
+  height: 100px;
+  border-bottom: 2px solid black;
+}
+
+.playerRow h2 {
+  margin: 0;
+}
+
+.playerRow img {
+  border-radius: 50%;
+  margin-top: 20px;
+}
+
+.h {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+@media only screen and (max-width: 600px) {
+  .navBar h1 {
+    margin-right: 5vw;
+    margin-left: 5vw;
+  }
+
+  .game {
+    width: 100%;
+    height: 300px;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .game img {
+    height: 80px;
+    width: 80px;
+    margin: 0;
+  }
+
+  .home h1 {
+    font-size: 2rem;
+  }
+
+  .home h2 {
+    font-size: 2rem;
+  }
+
+  .home h2 {
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 20%;
+  }
+
+  .away h2 {
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 20%;
+  }
+
+  .home {
+    min-width: 100%;
+    height: 120px;
+    display: flex;
+    padding: 10px;
+  }
+
+  .away {
+    min-width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+  }
+
+  .middleInfo {
+    min-width: 100%;
+    width: 80%;
+    height: 50px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-right: 0;
+    border-left: 0;
+  }
+
+  .nameLogo h1 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 40%;
+  }
+
+  .nameLogo {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    padding: 5px;
+  }
+
+  .middleInfo h1 {
+    font-size: 1.5rem;
+  }
+
+  .date {
+    width: 100%;
+  }
+
+  .date h1 {
+    font-size: 1.5rem;
+  }
 }

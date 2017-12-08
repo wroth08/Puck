@@ -20,7 +20,7 @@ class Game extends Component {
                     <div className="home">
                         <div className="nameLogo">
                             <h1>{this.props.homeName}</h1>
-                            <img src={this.props.awayLogo} alt="logo" height="300" width="300"/>
+                            <img src={this.props.awayLogo} alt="logo"/>
                         </div>
                         <h2>{this.props.homeScore}</h2>
                     </div>
@@ -31,7 +31,7 @@ class Game extends Component {
                     <div className="away">
                         <div className="nameLogo">
                             <h1>{this.props.awayName}</h1>
-                            <img src={this.props.homeLogo} alt="logo"  height="300" width="300"/>
+                            <img src={this.props.homeLogo} alt="logo"/>
                         </div>
                         <h2>{this.props.awayScore}</h2>
                     </div>

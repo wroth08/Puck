@@ -29,6 +29,7 @@ class App extends Component {
     this.getLiveData = this.getLiveData.bind(this)
     this.getStandings = this.getStandings.bind(this)
     this.getShotData = this.getShotData.bind(this)
+    this.getTeamStats = this.getTeamStats.bind(this)
     this.state = {
       games: [],
       teams: [],
@@ -48,7 +49,7 @@ class App extends Component {
     this.getTeams(this.state.time)
     this.getStandings()
     this.getShotData(8475765)
-    this.getStandings()
+    this.getTeamStats()
     var interval = setInterval(this.getLiveScores, 100000)
   }
 
@@ -63,6 +64,14 @@ class App extends Component {
       .then( (res) => res.json())
       .then( (res) => {
         this.setState({standings: res['records']})
+      })
+  }
+
+  getTeamStats() {
+    fetch(`https://frozen-hollows-10128.herokuapp.com/http://www.nhl.com/stats/rest/team?isAggregate=false&reportType=basic&isGame=false&reportName=teamsummary&sort=[{%22property%22:%22points%22,%22direction%22:%22DESC%22},{%22property%22:%22wins%22,%22direction%22:%22DESC%22}]&factCayenneExp=gamesPlayed%3E=1&cayenneExp=gameTypeId=2%20and%20seasonId%3E=20172018%20and%20seasonId%3C=20172018`)
+      .then( (res) => res.json())
+      .then( (res) => {
+        this.setState({teamStats: res['data']})
       })
   }
 
@@ -130,7 +139,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
         <div className="App">
         <NavBar/>
         <Route exact path="/" component={() => <Dashboard 
@@ -149,14 +158,14 @@ class App extends Component {
               standings={this.state.standings}
             />}
           />
-        <Route exact path="/game/:id" component={() => <GameView 
+        <Route exact path="/game/:id" component={({match}) => <GameView 
+            id={match.params.id}
             teams={this.state.teams}
             setGameId={this.setGameId}
             liveData={this.state.liveGame}
             currentGame={this.state.games.filter( (game) => {
               return game['gamePk'] === this.state.currentGameId
             })}
-            id={this.state.currentGameId}
           />}
         />
         <Route exact path="/game/:id/events" component={() => <GameEventFeed
@@ -185,6 +194,7 @@ class App extends Component {
           id={match.params.id}
           teams={this.state.teams}
           standings={this.state.standings}
+          teamStats={this.state.teamStats}
           />}
         />
 
