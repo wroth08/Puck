@@ -13,6 +13,8 @@ import Standings from './components/Standings'
 import Team from './components/Team'
 import NavBar from './components/NavBar'
 
+import mp3_file from './audio/goalhorn.mp3'
+
 var moment = require('moment')
 
 class App extends Component {
@@ -30,6 +32,7 @@ class App extends Component {
     this.getStandings = this.getStandings.bind(this)
     this.getShotData = this.getShotData.bind(this)
     this.getTeamStats = this.getTeamStats.bind(this)
+    this.playHorn = this.playHorn.bind(this)
     this.state = {
       games: [],
       teams: [],
@@ -48,9 +51,8 @@ class App extends Component {
     this.getLiveScores()
     this.getTeams(this.state.time)
     this.getStandings()
-    this.getShotData(8475765)
     this.getTeamStats()
-    var interval = setInterval(this.getLiveScores, 100000)
+    var interval = setInterval(this.getLiveScores, 10000)
   }
 
   setTime() {
@@ -79,6 +81,52 @@ class App extends Component {
     fetch(`https://statsapi.web.nhl.com/api/v1/schedule?startDate=${this.state.time}&endDate=${this.state.time}&expand=schedule.teams,schedule.linescore,schedule.broadcasts,schedule.ticket,schedule.scoringplays,schedule.game.content.media.epg&leaderCategories=&site=en_nhl&teamId=`)
       .then( (res) => res.json())
       .then( (res) => {
+        if (this.state.games[0] !== undefined) {
+          let scores = this.state.games.map( (game) => {
+            return {
+              homeName: game['teams']['home']['team']['name'],
+              awayName: game['teams']['away']['team']['name'],
+              homeScore: game['teams']['home']['score'],
+              awayScore: game['teams']['away']['score'],
+              gameId: game['gamePk']
+            }
+          })
+          let newScores = res.dates[0]['games'].map( (game) => {
+            return {
+              homeName: game['teams']['home']['team']['name'],
+              awayName: game['teams']['away']['team']['name'],
+              homeScore: game['teams']['home']['score'],
+              awayScore: game['teams']['away']['score'],
+              scoringPlays: game['scoringPlays']
+            }
+          })
+          for (let i = 0; i < scores.length; i++) {
+            if (scores[i]['homeName'] === newScores[i]['homeName']) {
+              if (scores[i]['homeScore'] !== newScores[i]['homeScore']) {
+                console.log(`${scores[i]['homeName']} scored in game ${scores[i]['gameId']}`)
+                console.log(newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1])
+                let goalscorer = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'][0]['player']['fullName']
+                let assisters = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'].filter( (player) => {
+                  return player['playerType'] === "Assist"
+                })
+                console.log(goalscorer)
+                console.log(assisters)
+                this.playHorn()
+              } else if (scores[i]['awayScore'] !== newScores[i]['awayScore'] && scores[i]['awayName'] === newScores[i]['awayName']) {
+                console.log(`${scores[i]['awayName']} scored in game ${scores[i]['gameId']}`)
+                console.log(newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1])
+                let goalscorer = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'][0]['player']['fullName']
+                let assisters = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'].filter( (player) => {
+                  return player['playerType'] === "Assist"
+                })
+                console.log(goalscorer)
+                console.log(assisters)
+                this.playHorn()
+              }
+            }
+          }
+        }
+
         this.setState({games: res.dates[0]['games']})
       })
   }
@@ -137,10 +185,18 @@ class App extends Component {
       })
   }
 
+  playHorn () {
+    let audio = document.getElementById('audio_player')
+    audio.play()
+  }
+
   render() {
     return (
       <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
         <div className="App">
+        <audio id="audio_player">
+          <source id="src_mp3" type="audio/mp3" src={mp3_file}/>
+        </audio>    
         <NavBar/>
         <Route exact path="/" component={() => <Dashboard 
             getLiveData={this.getLiveData}
