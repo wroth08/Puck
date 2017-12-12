@@ -1,9 +1,23 @@
 {
-  "name": "capstone",
+  "name": "PuckMe",
   "version": "0.1.0",
+  "author": "Weston",
   "private": true,
+  "homepage": "./",
+  "build": {
+    "appId": "com.example.electron-cra",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories":{
+      "buildResources": "assets"
+    }
+  },
+  "main": "public/electron.js",
   "dependencies": {
     "chart.js": "^2.7.1",
+    "electron-is-dev": "^0.3.0",
     "moment": "^2.19.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
@@ -15,6 +29,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build --em.main=build/electron.js",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "electron": "^1.7.9",
+    "electron-builder": "^19.49.0",
+    "wait-on": "^2.0.2"
   }
 }

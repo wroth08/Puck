@@ -14,6 +14,7 @@ import Team from './components/Team'
 import NavBar from './components/NavBar'
 
 import mp3_file from './audio/goalhorn.mp3'
+import goalhorn from './img/goalhorn.png'
 
 var moment = require('moment')
 
@@ -51,8 +52,10 @@ class App extends Component {
     this.getLiveScores()
     this.getTeams(this.state.time)
     this.getStandings()
-    this.getTeamStats()
+    this.getTeamStats() 
     var interval = setInterval(this.getLiveScores, 10000)
+    Notification.requestPermission();
+    var notify = new Notification('Goooooooooooooal', { body: 'Someone Scored!', icon: goalhorn });
   }
 
   setTime() {
@@ -101,27 +104,29 @@ class App extends Component {
             }
           })
           for (let i = 0; i < scores.length; i++) {
-            if (scores[i]['homeName'] === newScores[i]['homeName']) {
-              if (scores[i]['homeScore'] !== newScores[i]['homeScore']) {
-                console.log(`${scores[i]['homeName']} scored in game ${scores[i]['gameId']}`)
-                console.log(newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1])
-                let goalscorer = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'][0]['player']['fullName']
-                let assisters = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'].filter( (player) => {
-                  return player['playerType'] === "Assist"
-                })
-                console.log(goalscorer)
-                console.log(assisters)
-                this.playHorn()
-              } else if (scores[i]['awayScore'] !== newScores[i]['awayScore'] && scores[i]['awayName'] === newScores[i]['awayName']) {
-                console.log(`${scores[i]['awayName']} scored in game ${scores[i]['gameId']}`)
-                console.log(newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1])
-                let goalscorer = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'][0]['player']['fullName']
-                let assisters = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'].filter( (player) => {
-                  return player['playerType'] === "Assist"
-                })
-                console.log(goalscorer)
-                console.log(assisters)
-                this.playHorn()
+            if (scores[i] !== undefined && newScores[i] !== undefined) {
+              if (scores[i]['homeName'] === newScores[i]['homeName']) {
+                if (scores[i]['homeScore'] !== newScores[i]['homeScore']) {
+                  console.log(`${scores[i]['homeName']} scored in game ${scores[i]['gameId']}`)
+                  console.log(newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1])
+                  let goalscorer = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'][0]['player']['fullName']
+                  let assisters = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'].filter( (player) => {
+                    return player['playerType'] === "Assist"
+                  })
+                  console.log(goalscorer)
+                  console.log(assisters)
+                  this.playHorn()
+                } else if (scores[i]['awayScore'] !== newScores[i]['awayScore'] && scores[i]['awayName'] === newScores[i]['awayName']) {
+                  console.log(`${scores[i]['awayName']} scored in game ${scores[i]['gameId']}`)
+                  console.log(newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1])
+                  let goalscorer = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'][0]['player']['fullName']
+                  let assisters = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'].filter( (player) => {
+                    return player['playerType'] === "Assist"
+                  })
+                  console.log(goalscorer)
+                  console.log(assisters)
+                  this.playHorn()
+                }
               }
             }
           }
@@ -206,14 +211,14 @@ class App extends Component {
             nextDay={this.nextDay}
             prevDay={this.prevDay}
             setGameId={this.setGameId}/>}
-          />
-          <Route path="/standings" component={() => <Standings
+        />
+        <Route path="/standings" component={() => <Standings
               games={this.state.games} 
               teams={this.state.teams} 
               time={moment(this.state.time).format("MMMM DD")}
               standings={this.state.standings}
             />}
-          />
+        />
         <Route exact path="/game/:id" component={({match}) => <GameView 
             id={match.params.id}
             teams={this.state.teams}
