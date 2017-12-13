@@ -53,9 +53,7 @@ class App extends Component {
     this.getTeams(this.state.time)
     this.getStandings()
     this.getTeamStats() 
-    var interval = setInterval(this.getLiveScores, 10000)
-    Notification.requestPermission();
-    var notify = new Notification('Goooooooooooooal', { body: 'Someone Scored!', icon: goalhorn });
+    var interval = setInterval(this.getLiveScores, 5000)
   }
 
   setTime() {
@@ -107,25 +105,43 @@ class App extends Component {
             if (scores[i] !== undefined && newScores[i] !== undefined) {
               if (scores[i]['homeName'] === newScores[i]['homeName']) {
                 if (scores[i]['homeScore'] !== newScores[i]['homeScore']) {
-                  console.log(`${scores[i]['homeName']} scored in game ${scores[i]['gameId']}`)
-                  console.log(newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1])
                   let goalscorer = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'][0]['player']['fullName']
                   let assisters = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'].filter( (player) => {
                     return player['playerType'] === "Assist"
                   })
-                  console.log(goalscorer)
-                  console.log(assisters)
+                  assisters = assisters.map( (player) => {
+                    return player.player.fullName
+                  })
                   this.playHorn()
+                  if (assisters.length < 1) {
+                    Notification.requestPermission();
+                    var notify = new Notification(`${scores[i]['homeName']} Goal!`, { body: `Scored by ${goalscorer}`, icon: goalhorn })
+                  } else if (assisters.length === 1) {
+                    Notification.requestPermission();
+                    var notify = new Notification(`${scores[i]['homeName']} Goal!`, { body: `Scored by ${goalscorer}, and assisted by ${assisters[0]}`, icon: goalhorn })
+                  } else if (assisters.length > 1) {
+                    Notification.requestPermission();
+                    var notify = new Notification(`${scores[i]['homeName']} Goal!`, { body: `Scored by ${goalscorer}, and assisted by ${assisters[0]} and ${assisters[1]}`, icon: goalhorn })
+                  }
                 } else if (scores[i]['awayScore'] !== newScores[i]['awayScore'] && scores[i]['awayName'] === newScores[i]['awayName']) {
-                  console.log(`${scores[i]['awayName']} scored in game ${scores[i]['gameId']}`)
-                  console.log(newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1])
                   let goalscorer = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'][0]['player']['fullName']
                   let assisters = newScores[i]['scoringPlays'][newScores[i]['scoringPlays'].length - 1]['players'].filter( (player) => {
                     return player['playerType'] === "Assist"
                   })
-                  console.log(goalscorer)
-                  console.log(assisters)
+                  assisters = assisters.map( (player) => {
+                    return player.player.fullName
+                  })
                   this.playHorn()
+                  if (assisters.length < 1) {
+                    Notification.requestPermission();
+                    var notify = new Notification(`${scores[i]['awayName']} Goal!`, { body: `Scored by ${goalscorer}`, icon: goalhorn })
+                  } else if (assisters.length === 1) {
+                    Notification.requestPermission();
+                    var notify = new Notification(`${scores[i]['awayName']} Goal!`, { body: `Scored by ${goalscorer}, and assisted by ${assisters[0]}`, icon: goalhorn })
+                  } else if (assisters.length > 1) {
+                    Notification.requestPermission();
+                    var notify = new Notification(`${scores[i]['awayName']} Goal!`, { body: `Scored by ${goalscorer}, and assisted by ${assisters[0]} and ${assisters[1]}`, icon: goalhorn })
+                  }
                 }
               }
             }
@@ -166,7 +182,6 @@ class App extends Component {
             this.setState({player: {shots: res['data'][0]}})
         })
   }
-
   getLogos() {
     let newTeams = [...this.state.teams]
     newTeams.map( (team) => {
