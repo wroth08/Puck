@@ -19,7 +19,7 @@ CrossCheck is mobile-compatible and soon to be tablet-compatible as well.
 ## Desktop App Info
 * Will send desktop notifications rather than through the browser
 * Is set to open at a width of 400px, to be set side-by-side while working on/doing something else like so:
-[Electron example](http://github.com/wroth08/puck/blob/electronexample.png)
+[Electron example](./electronexample.png)
 * Can also be run in full-screen like the web app
 * Built with the aforementioned technologies, as well as Electron
 
