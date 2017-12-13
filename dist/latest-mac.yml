@@ -1,0 +1,10 @@
+version: 0.1.0
+files:
+  - url: PuckMe-0.1.0-mac.zip
+    sha512: ZKBJ7HrY9mDxzFsIJ6OnILhRYDebeJzEmjfAqHB2XXK1lvqYJW2aiKR+aR0a0JkKd8PBTYciyWCK6Du7frOe1g==
+  - url: PuckMe-0.1.0.dmg
+    sha512: SNS1wdIFu5eUN+d1KBBbSW9nl0IehRZBhpyNgpmf5+aUh2iD7Q+kKtW1OR+er5Vae4MybR8/3gq9f3w1Zx+weg==
+    size: 56242845
+path: PuckMe-0.1.0-mac.zip
+sha512: ZKBJ7HrY9mDxzFsIJ6OnILhRYDebeJzEmjfAqHB2XXK1lvqYJW2aiKR+aR0a0JkKd8PBTYciyWCK6Du7frOe1g==
+releaseDate: '2017-12-12T20:26:51.559Z'
