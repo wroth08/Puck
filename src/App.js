@@ -34,6 +34,8 @@ class App extends Component {
     this.getShotData = this.getShotData.bind(this)
     this.getTeamStats = this.getTeamStats.bind(this)
     this.playHorn = this.playHorn.bind(this)
+    this.oldScores = this.oldScores.bind(this)
+    this.theNewScores = this.theNewScores.bind(this)
     this.state = {
       games: [],
       teams: [],
@@ -53,7 +55,7 @@ class App extends Component {
     this.getTeams(this.state.time)
     this.getStandings()
     this.getTeamStats() 
-    var interval = setInterval(this.getLiveScores, 5000)
+    var interval = setInterval(this.getLiveScores, 10000)
   }
 
   setTime() {
@@ -78,29 +80,37 @@ class App extends Component {
       })
   }
 
+  oldScores() {
+    return this.state.games.map( (game) => {
+      return {
+        homeName: game['teams']['home']['team']['name'],
+        awayName: game['teams']['away']['team']['name'],
+        homeScore: game['teams']['home']['score'],
+        awayScore: game['teams']['away']['score'],
+        gameId: game['gamePk']
+      }
+    })
+  }
+
+  theNewScores(games) {
+    return games.map( (game) => {
+      return {
+        homeName: game['teams']['home']['team']['name'],
+        awayName: game['teams']['away']['team']['name'],
+        homeScore: game['teams']['home']['score'],
+        awayScore: game['teams']['away']['score'],
+        scoringPlays: game['scoringPlays']
+      }
+    })
+  }
+
   getLiveScores() {
     fetch(`https://statsapi.web.nhl.com/api/v1/schedule?startDate=${this.state.time}&endDate=${this.state.time}&expand=schedule.teams,schedule.linescore,schedule.broadcasts,schedule.ticket,schedule.scoringplays,schedule.game.content.media.epg&leaderCategories=&site=en_nhl&teamId=`)
       .then( (res) => res.json())
       .then( (res) => {
-        if (this.state.games[0] !== undefined) {
-          let scores = this.state.games.map( (game) => {
-            return {
-              homeName: game['teams']['home']['team']['name'],
-              awayName: game['teams']['away']['team']['name'],
-              homeScore: game['teams']['home']['score'],
-              awayScore: game['teams']['away']['score'],
-              gameId: game['gamePk']
-            }
-          })
-          let newScores = res.dates[0]['games'].map( (game) => {
-            return {
-              homeName: game['teams']['home']['team']['name'],
-              awayName: game['teams']['away']['team']['name'],
-              homeScore: game['teams']['home']['score'],
-              awayScore: game['teams']['away']['score'],
-              scoringPlays: game['scoringPlays']
-            }
-          })
+        if (this.state.games[0] !== undefined && res['totalGames'] !== 0) {
+          let scores = this.oldScores()
+          let newScores = this.theNewScores(res.dates[0]['games'])
           for (let i = 0; i < scores.length; i++) {
             if (scores[i] !== undefined && newScores[i] !== undefined) {
               if (scores[i]['homeName'] === newScores[i]['homeName']) {
@@ -147,8 +157,11 @@ class App extends Component {
             }
           }
         }
-
-        this.setState({games: res.dates[0]['games']})
+        if (res['totalGames'] !== 0) {
+          this.setState({games: res.dates[0]['games']})
+        } else {
+          this.setState({games: []})
+        }
       })
   }
 
